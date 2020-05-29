@@ -50,4 +50,6 @@ To design, model and deploy the solution will be applied the CRISP-DS (Cross-Ind
 The CRISP is a cyclic, iterative development method that covers all the steps needed to solve a data science problem. The image below shows the CRISP cycle:
 ![](img/CRISP.jpg)
 
+[back to top](#table-of-contents)
+
 ---
