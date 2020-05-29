@@ -6,6 +6,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 ## Table of Contents
 - [Introduction](#introduction)
 - [Module 01. The Business Problem](#module-01-the-business-problem)
+- [Module 02. Data Description]
 
 ---
 
@@ -53,3 +54,24 @@ The CRISP is a cyclic, iterative development method that covers all the steps ne
 [back to top](#table-of-contents)
 
 ---
+
+## Module 02. Data Description
+Data description goal is to describe and understand the available dataset that will be used to train and validate the model. In other words: **one must know the data at hand** and then notice: how challenging is the problem?
+
+There are several ways to make a first, general data analysis. In this case, the following steps will be taken:
+- Data Dimensions;
+- Data Types;
+- Missing values (check and fillout);
+- Descriptive Statistics.
+
+The descriptive Statistics is particularly important for two main reasons:
+1. Gain business know-how;
+2. Check Failures.
+
+Within the Descriptive Statistics there are two main metrics:
+- Dispersion metrics (standard deviation, min, max, skew, kurtosis);
+- Central Tendency metrics (for example mean and median).
+
+
+
+[back to top](#table-of-contents)
