@@ -6,7 +6,6 @@ This Repository contains the scripts and files related to the course Data Scienc
 ## Table of Contents
 - [Introduction](#introduction)
 - [Module 01. The Business Problem](#module-01-the-business-problem)
-- [Module 02. Data Description]
 
 ---
 
