@@ -6,7 +6,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 ## Table of Contents
 - [Introduction](#introduction)
 - [Module 01. The Business Problem](#module-01-the-business-problem)
-- [Module 02. Data Description]
+- [Module 02. Data Description](#module-02-data-description)
 
 ---
 
@@ -72,6 +72,23 @@ Within the Descriptive Statistics there are two main metrics:
 - Dispersion metrics (standard deviation, min, max, skew, kurtosis);
 - Central Tendency metrics (for example mean and median).
 
+- **Data Dimension:**
 
+Number of Rows: 1017209
+
+Number of Cols: 18
+
+- **Date Range:**
+
+first     2013-01-01
+
+last      2015-07-31
+
+- **Summary Statistics:**
+  - Numerical attributes summary table:
+  ![](img/numericalattributes.png)
+  
+  - Categorical Attributes Boxplot:
+  ![](img/boxplotcatattributes.png)
 
 [back to top](#table-of-contents)
