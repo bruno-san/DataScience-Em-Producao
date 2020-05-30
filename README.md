@@ -72,23 +72,27 @@ Within the Descriptive Statistics there are two main metrics:
 - Dispersion metrics (standard deviation, min, max, skew, kurtosis);
 - Central Tendency metrics (for example mean and median).
 
-- **Data Dimension:**
+**Data Dimension:**
 
-Number of Rows: 1017209
+- Number of Rows: 1017209
 
-Number of Cols: 18
+- Number of Cols: 18
 
-- **Date Range:**
+**Date Range:**
 
-first     2013-01-01
+- first     2013-01-01
 
-last      2015-07-31
+- last      2015-07-31
 
-- **Summary Statistics:**
-  - Numerical attributes summary table:
-  ![](img/numericalattributes.png)
+
+**Summary Statistics:**
+- Numerical attributes summary table:
+![](img/numericalattributes.PNG)
   
-  - Categorical Attributes Boxplot:
-  ![](img/boxplotcatattributes.png)
+  
+- Categorical Attributes Boxplot:
+![](img/boxplotcatattributes.PNG)
 
 [back to top](#table-of-contents)
+
+---
