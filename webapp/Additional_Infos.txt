@@ -1,0 +1,11 @@
+The changes below were made in order to allow the Deployment @ Heroku.
+
+Requirements.txt - removed lines:
+mkl_fft==1.0.15
+mkl-random==1.1.1
+mkl-service==2.3.0
+pywin32==227
+
+Host changed in handler.py file:
+- was 127.0.0.1
+- is 0.0.0.0
