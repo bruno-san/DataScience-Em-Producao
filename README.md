@@ -8,6 +8,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Version 02 Improvements](#version-02-improvements)
 - [Module 01. The Business Problem](#module-01-the-business-problem)
 - [Module 02. Data Description](#module-02-data-description)
+- [Module 03. Feature Engineering](#module-03-feature-engineering)
 
 ---
 
@@ -110,3 +111,20 @@ Within the Descriptive Statistics there are two main metrics:
 [back to top](#table-of-contents)
 
 ---
+
+## Module 03. Feature Engineering
+### 1. Mind Map Hypothesis
+The Mind Map is created in order to understand and highlight the key points below:
+1.	Phenomenon: What phenomenon is being modeled?
+2.	What are the factors that influence the phenomenon?
+3.	What are the factors’ attributes?
+4.	Hypothesis List: Hypothesis to validate with the data.
+
+The main goal of the mind map is to generate a hypothesis list, which will later derivate an Analysis to validate or reject them. As a result, this analysis will be the basis for business insights, which can be both new, unknown information obtained from the data analysis, as well as to oppose some biased belief.
+
+The Mind Map below shows the key factors of daily store sales.
+![](img/Mindmaphypothesis.PNG)
+
+### 2. Hypothesis List
+Based on the Mind Map, the Hypothesis List below was generated. It is important though to highlight that the hypothesis are not a cause-effect relation, but a correlation. For example, a big store should always sell more it is not always the truth in practice. The goal is to recognize and understand the tiny, little effects that contribute to increase or decrease the sales. Furthermore, for the final hypothesis list it is also taken into account the availability of information in the dataset, once the hypothesis will be later checked in the exploratory data analysis step.
+
