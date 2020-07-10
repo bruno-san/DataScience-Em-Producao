@@ -61,6 +61,8 @@ The above-mentioned key points show that there is relevant content behind the 6 
 ### 2. The Data
 The Dataset applied to develop the solution is the [Rossmann Store Sales from Kaggle.](https://www.kaggle.com/c/rossmann-store-sales/data)
 
+Note: the test dataset applied on version 02 was generated on the customers' prediction project and it's available in this repository.
+
 ### 3. Solution approach: The CRISP-DS Cycle
 To design, model and deploy the solution will be applied the CRISP-DS (Cross-Industry Standard Process - Data Science, a.k.a. CRISP-DM) project management method.
 The CRISP is a cyclic, iterative development method that covers all the steps needed to solve a data science problem. The image below shows the CRISP cycle:
@@ -157,6 +159,195 @@ For this problem the closed stores and stores with sales equal to zero were filt
 After all of these steps the final features are described below:
 
 ![](img/m03_features.PNG)
+
+[back to top](#table-of-contents)
+
+---
+
+## Module 04. Exploratory Data Analysis (EDA)
+The exploratory data analysis is one of the main steps of the CRISP cycle. It is aimed to measure the variables impact to the response variable (target), gain business know-how, validate business hypothesis (insights) and recognize the variables that are important to the model. Also, through the exploratory data analysis both the phenomenon and the model’s prediction can be clearly explained and visualized. It is mainly with the EDA that the whole project can be presented and explained through storytelling.
+
+The EDA consists in 3 main steps:
+1.	Univariate Analysis: how is the variable behavior?
+2.	Bivariate Analysis: how the variable impacts in the response variable?
+3.	Multivariate Analysis: how the variables correlate with each other?
+
+### 1.0. Univariate Analysis
+The univariate analysis explores the variable itself, so that can be checked the variable frequency, distribution, range. Etc.
+
+Below are the variables distribution graphics:
+
+#### 1.1. Sales Distribution (response variable)
+
+![](img/module04/1_1_sales_dist.PNG)
+
+The sales have an exponential distribution with positive skew. That’s key information that will be used on the data preparation step (step 5). Also, the right tail of the graphic shows sales up to 25,000. That would be higher if in the previous step (variables filtering) the outliers (0,1%) were not removed.
+
+#### 1.2. Numerical Variables Distribution
+
+![](img/module04/1_2_num_variables.PNG)
+
+![](img/module04/1_2_num_variables_2.PNG)
+
+**Highlights:**
+-	Competition distance: close competition stores (distance less than 25km) represents almost all of the observations;
+-	Competition open since year: there are competitors open since the 1900’s year, but it is predominant competitors since the 2000’s year.
+-	Customers has an exponential distribution, very similar to the sales one;
+-	6 days have considerably more frequency than the 25 others;
+-	Day of week 7 (Sunday) has a very low frequency compared to the other days. That’s because the stores seldom open on Sundays in Germany (home of Rossmann).
+-	Month frequency from August to December are lower than the other months. That’s because the dataset contains registers from 2013 to July 2015.
+-	Promo since year higher frequencies on 2013 and 2014.
+
+#### 1.3. Categorical Variables Distribution
+
+![](img/module04/1_3_cat_variables_1.PNG)
+
+![](img/module04/1_3_cat_variables_2.PNG)
+
+**Highlights:**
+-	Holidays: the public holiday frequency is considerably higher than the other ones;
+-	Store type “a” and “d” are the most frequent in the dataset;
+-	Store assortment “extra” frequency is remarkably lower than the basic and extended ones.
+
+### 2.0. Bivariate Analysis
+The bivariate analysis consists of the independent variable analysis with respect to the dependent variable (target). It can be divided into two perspectives:
+1.	Hypothesis validation or rejection - is it possible to generate an insight?
+2.	Is the independent variable relevant for the model?
+
+The following analysis and graphs were made based on the hypothesis list previously issued.
+
+#### 2.1. Hypothesis H1: Stores with bigger assortment should sell more.
+
+![](img/module04/2_1_H1_1.PNG)
+
+![](img/module04/2_1_H1_2.PNG)
+
+As the available data do not precisely describe the big assortment, it was assumed that the extra assortment was the big one. The graphics show that the extra assortment sells less than the others. Furthermore, the basic assortment sells more than the extended one, therefore it is claimed that the hypothesis H1 is false: stores with bigger assortment sell less.
+
+#### 2.2. Hypothesis H2: Stores with competition closer should sell less.
+
+![](img/module04/2_2_H2.PNG)
+
+The bar graphic shows that most of the stores that have competitors up to 1000m of distance sell more than the others. This happens because most of the stores have competitors close, as already shown in the univariate analysis. It is likely that such stores are placed in the big city centers, which have lots of stores near each other. Hence, the hypothesis is false: stores with competition close sell more. In addition, the heatmap (pearson method) shows a correlation of -0.23 between both variables.
+
+#### 2.3. Hypothesis H3: Stores with longer time competition should sell more.
+
+![](img/module04/2_3_H3.PNG)
+
+The scatter plot with the regression line clearly shows that the longer the time, the less sales amount. Another point that stands out is the negative values in the time month axis: that means that the competition will open a new store soon in the future. The bar plot shows that competition time month values near to zero represents more sales than bigger competition time month. Hence, the hypothesis is false: stores with longer time competition sell less. The heatmap shows a correlation of -0.1 between both variables.
+
+#### 2.4. Hypothesis H4: Stores with longer sale (promo) should sell more.
+
+![](img/module04/2_4_H4.PNG)
+
+The graphics were detached in two due to the two periods of promo: the standard promo and the extended promo (promo2). The promo time week higher than zero means the sale at that date was done in the promo 2 period (extended), while the promo time week lower than zero means the sale at that date was done in the standard promo period. The standard promo scatter plot with regression line shows constant sales growth. On the other hand, the extended promo (promo 2) scatter plot shows sales decrease throughout time. Therefore, the hypothesis is false: stores with longer sale (promo) sell less after some period. Also, the heatmap shows a correlation of -0.029 between promo time week and sales.
+
+#### 2.5. Hypothesis H5: Stores with more sale (promo) days should sell more.
+
+![](img/module04/2_5_H5_1.PNG)
+
+The bar plot shows that stores with promo sell more than stores without promo. The insight for this point comes actually from the customers EDA, which shows that stores with promo have fewer customers than stores without promo (bar plot below). This means that even though the stores have fewer customers, they buy more on promo time.
+
+![](img/module04/2_5_H5_2.PNG)
+
+Hence, the hypothesis is true: stores with more sale (promo) days sell more.
+In addition, the heatmap shows a correlation of 0.37 between promo variable and sales.
+
+![](img/module04/2_5_H5_3.PNG)
+
+#### 2.6. Hypothesis H6: Stores with more consecutive sale (promo) should sell more.
+
+![](img/module04/2_6_H6.PNG)
+
+The analysis above was made considering two conditions: stores with both traditional (promo) and extended (promo2) sales and stores with only traditional sales. The graphic clearly shows that both conditions have the same line pattern, with exception of the period from calendar week 26 of 2014 until approximately the last weeks of 2014, where traditional sales outperform the combined traditional and extended. Hence, the hypothesis is false: stores with more consecutive sale sell less.
+
+#### 2.7. Hypothesis H7: Stores open on Christmas time should sell more.
+
+![](img/module04/2_7_H7.PNG)
+
+The bar plot shows that Christmas holiday represents the worst sales values compared to the other holidays. Even though the Christmas data of 2015 is not available in the dataset, the bar plot divided by year shows that in 2013 and 2014 it was the worst holiday in terms of sales compared to the other holidays. Therefore, the hypothesis is false: stores open on Christmas sell less.
+
+#### 2.8. Hypothesis H8: Stores should sell more throughout the years.
+
+![](img/module04/2_8_H8.PNG)
+
+Both bar and regression plot show that the sales are decreasing throughout the years. However, it is important to point out that the dataset contains observations of 2015 only until July, therefore it has a fewer sales amount. Also, it is not possible to assume whether the sales of 2015 will be better or worse than 2013 and 2014. To do so, one should make a project only to predict the sales until the end of 2015. 
+A more detailed analysis is shown in the next hypothesis data exploration. Nevertheless, based on the available data, the hypothesis is false: stores sell less throughout the years. Furthermore, the heatmap shows a strong correlation of -0.92 between year and sales.
+
+#### 2.9. Hypothesis H9: Stores should sell more on second semester.
+
+![](img/module04/2_9_H9_1.PNG)
+
+The bar plot and the scatter plot with regression line show that the sales decrease throughout the months. That is mainly because the data of 2015 have observations only from January until July. Therefore, the graphics below were generated to compare monthly sales performance by year.
+
+![](img/module04/2_9_H9_2.PNG)
+
+The bar plot of 2013 shows sales increase in the second semester. On the other hand, the bar plot of 2014 shows the opposite: the sales decreased in the second semester. Unfortunately, there is no available data for the whole year of 2015, therefore it is not possible to confirm whether the second semester of this year sold more than the previous one.
+
+Below are the bar plots divided by the first and second semester of each year. The first semester of 2015 outperformed the first and second semester of 2014, but it is not possible to assume that the second semester of 2015 will perform better or worse than that. As previously mentioned, for a conclusive statement it is necessary to develop a new project to predict the sales until the end of 2015.
+
+![](img/module04/2_9_H9_3.PNG)
+
+Based on the available data and the analysis described above, it is assumed that the hypothesis is false: stores sell less on second semester.
+
+In addition, the heatmap shows a strong correlation of -0.76 between month variable and sales.
+
+![](img/module04/2_9_H9_4.PNG)
+
+#### 2.10. Hypothesis H10: Stores should sell more after the 10th day of the month.
+
+![](img/module04/2_10_H10_1.PNG)
+
+The scatter plot with regression line shows a tendency of sales decrease as the day of the month increases. The first bar plot shows the amount of sales by each day of the month, however it is not conclusive. Hence, the second bar plot was generated grouping each 10 days, which resulted in three main blocks: before 10 days, between day 11 and 20 and between day 21 and day 31. The first block is slightly higher than the others. The table below shows the exact sales values, in order to confirm which period represents more sales.
+
+![](img/module04/2_10_H10_2.PNG)
+
+The sales before 10 days are higher than the other periods. Hence, the hypothesis is false: stores sell less after the 10th day of the month.
+
+One point to highlight is the EDA from the customers’ prediction project regarding the amount of customers after the 10th day of the month: the number of customers’ increases after the 10th day, as shown in the bar plot and table below. That is the opposite of the sales amount as shown above. Therefore, it can be assumed that, although the number of customers increases throughout the month, the sales don’t necessarily follow the same pattern. In other words: the customers spend less money after the 10th day of the month.
+
+![](img/module04/2_10_H10_3.PNG)
+
+Furthermore, the heatmap shows a correlation of -0.35 between day variable and sales.
+
+#### 2.11. Hypothesis H11: Stores should sell less on weekend.
+
+![](img/module04/2_11_H11.PNG)
+
+According to the ISO Week Day Standard, Monday is represented by number 1 and Sunday by number 7. This is the standard applied on this dataset. The bar plot clearly shows that day 7 (Sunday) have significantly fewer sales. That is because the stores seldom open on Sundays in Germany (home of Rossmann), as Sunday is the rest day for the Germans. Hence, the hypothesis is true: stores sell less on weekend. Furthermore, the heatmap shows a correlation of -0.76 between day of week and sales.
+
+#### 2.12. Hypothesis H12: Stores should sell less while school vacation.
+
+![](img/module04/2_12_H12.PNG)
+
+The first bar plot clearly shows that the sales are higher without school holiday. The second bar plot shows the school holiday per month. Only in August the sales on school holidays outperformed the sales without school holiday. Therefore, the hypothesis is true: stores sell less during school vacation.
+
+#### 2.13. Hypothesis H13: Stores with more customers should sell more.
+
+![](img/module04/2_13_H13.PNG)
+
+This hypothesis was added in the second CRISP cycle, as the customers prediction was generated in the customers prediction project. The scatter plot with regression line shows the relation between customers and sales: the more the customers, the more the sales. Furthermore, the heatmap also shows a strong correlation of 0.82 between them. Hence, the hypothesis is true: stores with more customers sell more.
+
+The table below summarizes the data exploration and hypothesis analysis and validation:
+
+![](img/module04/2_hypothesis_list.PNG)
+
+### 3.0. Multivariate Analysis
+The main goal of the multivariate analysis is to check how variables are related. This is important because it can show the variables with strong or weak relation. The weak ones can later be removed in order to reduce the dataset dimensionality, hence reduce model’s complexity.
+
+#### 3.1. Numerical Variables
+For the numerical variables it is applied the Pearson correlation method (a.k.a. Product Moment Correlation Coefficient – PMCC). The Pearson’s correlation coefficient measures the statistical relationship between two continuous variables. This method is widely applied because it is based on the method of covariance ([Reference](https://www.statisticssolutions.com/pearsons-correlation-coefficient/)). With Pearson coefficient can be stated that the variables are correlated, but it cannot be concluded that the variables have a causal relation. It is also important to highlight that a correlation equal to zero does NOT imply that the variables are independent. BUT independency between the variables implies in correlation equal to zero.
+
+The heatmap below shows the correlation of each variable according Pearson method.
+
+![](img/module04/3_1_num_variables.PNG)
+
+#### 3.2. Categorical Variables
+For the categorical variables it is applied the Cramer-V correlation method. A specific function was created in the code in order to calculate the correlation based on its formula, which includes among others a confusion matrix and the chi-squared ([Reference](https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V)).
+
+The heatmap below shows the categorical variables correlation according the Cramer-V method.
+
+![](img/module04/3_2_cat_variables.PNG)
 
 [back to top](#table-of-contents)
 
