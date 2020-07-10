@@ -155,6 +155,7 @@ The variable filtering is applied due to business restrictions. It is necessary 
 For this problem the closed stores and stores with sales equal to zero were filtered, because they are not relevant for the sales prediction. Furthermore, the 0,1%of  highest sales values were filtered because they are outliers. Additionally, the column open was removed because only open stores are now taken into account. The column promo interval was also removed, because new features were generated from it in the previous step, therefore its information is already in the dataset.
 
 After all of these steps the final features are described below:
+
 ![](img/m03_features.PNG)
 
 [back to top](#table-of-contents)
