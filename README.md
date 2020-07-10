@@ -9,6 +9,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 01. The Business Problem](#module-01-the-business-problem)
 - [Module 02. Data Description](#module-02-data-description)
 - [Module 03. Feature Engineering](#module-03-feature-engineering)
+- [Module 04. Exploratory Data Analysis (EDA)](#module-04-exploratory-data-analysis-(eda))
 
 ---
 
