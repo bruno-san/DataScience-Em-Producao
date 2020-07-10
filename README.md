@@ -5,6 +5,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [Version 02 Improvements](#version-02-improvements)
 - [Module 01. The Business Problem](#module-01-the-business-problem)
 - [Module 02. Data Description](#module-02-data-description)
 
@@ -19,6 +20,19 @@ For more details, please visit the [Data Science in Production website.](https:/
 
 The detailed description, step-by-step solution is described below.
 Please feel free to leave a comment with improvement suggestions: it will be highly appreciated!
+
+---
+
+## Version 02 Improvements
+The process described below refers to the version 02 of the CRISP cycle with improvements regarding to the first version. The main improvement is the use of forecasted customers’ number in the sales prediction. For that, it was made a new, specific project so that the customers’ number for the next 6 weeks could be predicted and then applied to the version 02 of the sales prediction model. This script is also available in this repository.
+
+Furthermore, other improvements were made such as outliers’ removal and additional feature scaling regarding the first version. All of this is described below in details.
+
+The improvements were made mainly due to the points below:
+- Practice and reinforce the course learned content – python code and the CRISP Cycle;
+- Improve the model predictions and results;
+- Better understand the business and get new insights;
+- To serve as a Coursework Completion.
 
 ---
 
