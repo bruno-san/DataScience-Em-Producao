@@ -123,7 +123,7 @@ The Mind Map is created in order to understand and highlight the key points belo
 The main goal of the mind map is to generate a hypothesis list, which will later derivate an Analysis to validate or reject them. As a result, this analysis will be the basis for business insights, which can be both new, unknown information obtained from the data analysis, as well as to oppose some biased belief.
 
 The Mind Map below shows the key factors of daily store sales.
-![](img/Mindmaphypothesis.PNG)
+![](img/Mindmaphypothesis.png)
 
 ### 2. Hypothesis List
 Based on the Mind Map, the Hypothesis List below was generated. It is important though to highlight that the hypothesis are not a cause-effect relation, but a correlation. For example, a big store should always sell more it is not always the truth in practice. The goal is to recognize and understand the tiny, little effects that contribute to increase or decrease the sales. Furthermore, for the final hypothesis list it is also taken into account the availability of information in the dataset, once the hypothesis will be later checked in the exploratory data analysis step.
