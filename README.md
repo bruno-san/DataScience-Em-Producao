@@ -13,6 +13,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 05. Data Preparation](#module-05-data-preparation)
 - [Module 06. Feature Selection](#module-06-feature-selection)
 - [Module 07. Machine Learning Modelling](#module-07-machine-learning-modelling)
+- [Module 08. Hyperparameter Fine Tuning](#module-08-hyperparameter-fine-tuning)
 
 ---
 
