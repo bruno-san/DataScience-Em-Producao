@@ -432,3 +432,56 @@ The log transformation was applied in the response variable (sales), as it has a
 [back to top](#table-of-contents)
 
 ---
+
+## Module 06. Feature Selection
+
+The feature selection is the last step of the data preparation. Not all the features may be relevant for the machine learning algorithm, as if they stay in the training dataset it can significantly slow the computing and increase the dimensionality and complexity of the input. To optimize that, it is widely applied the Occam’s razor principle: to explain a phenomenon by the simplest hypothesis possible. In other words: only the necessary features must be kept in the training dataset in order to allow the best machine learning model performance, so that the dimensionality reduces and the computing runs faster.
+
+Furthermore, the dataset must be split into two: training and test dataset, hence the machine learning algorithm can learn from the training dataset and then predict the values with the test dataset information, so that it can be compared and the error calculated with the response variable values from the test dataset, in order to measure the model’s performance.
+
+### 6.1. Remove Features with Same Information
+The first step is to remove the features that have the same underlying information, that is, for example, the features that previously were used to derivate new features in the feature engineering module, or the features that generated new features in the transformation step (module 05). Below is the list of the removed features:
+- Remove day_of_week due to day_of_week_sin, day_of_week_cos
+- Remove competition_open_since_month due to competition_open_since_month_sin, competition_open_since_month_cos
+- Remove promo2_since_week due to promo2_since_week_sin, promo2_since_week_cos
+- Remove month due to month_sin, month_cos
+- Remove day due to day_sin, day_cos
+- Remove week_of_year due to week_of_year_sin, week_of_year_cos
+- Remove year_week due to week_of_year_sin, week_of_year_cos
+- Remove competition_since due to competition_open_since_year, competition_time_month, competition_open_since_month_sin, competition_open_since_month_cos
+- Remove promo_since due to promo_time_week, promo2_since_week_sin, promo2_since_week_cos 
+
+### 6.2. Split Dataframe into Training and Test Dataset
+As previously mentioned, the dataset must be divided into training and test, so that the model can learn from the data and predict values that later can be compared and the error measured.
+
+In this project, the goal is to predict the sales for the next 6 weeks; therefore, it is a time series problem. That means that the dataset split must also follow the prediction period, that is: the test dataset must contain the last 6 weeks of the total dataset, and the training dataset must contain all the observations before the last 6 weeks. Hence, the dataset was detached as shown below:
+
+![](img/6_2_traintestsplit.PNG)
+
+### 6.3. Feature Selection
+There are several feature selection techniques and tools. The three main feature selection methods are:
+- Filter methods (univariate selection);
+- Embedded methods (significance selection);
+- Wrapper methods (Subset selection).
+
+The feature selection applied for this project is the wrapper method, with a specific feature selection library called Boruta.
+
+It is important to point out that the features selected by Boruta must be checked before deciding whether they will be applied or not in the final datatset. It is the Data Scientist role to evaluate the results and think, based on the exploratory data analysis, whether the features must really be considered or even if some feature not selected must be included in the final dataset.
+
+In this project, the Boruta was applied with a Random Forest Regressor and selected the following features as relevant for the machine learning model:
+
+![](img/6_3_boruta_selected.PNG)
+
+The features not selected by Boruta are shown below:
+
+![](img/6_3_boruta_notselected.PNG)
+
+Note: columns date and sales were removed before Boruta application, as they will not be used in the machine learning training.
+
+Features day_sin, month_sin and week_of_year_sin were not chosen by Boruta, nevertheless their complement day_cos, month_cos and week_of_year_cos were chosen. Therefore, they were added in the final features list, so that these features have complete representation with both complementary sin and cos dimensions. Finally, the final features list was set as shown below.
+
+![](img/6_3_boruta_finalfeatures.PNG)
+
+[back to top](#table-of-contents)
+
+---
