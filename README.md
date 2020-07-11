@@ -10,6 +10,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 02. Data Description](#module-02-data-description)
 - [Module 03. Feature Engineering](#module-03-feature-engineering)
 - [Module 04. Exploratory Data Analysis (EDA)](#module-04-exploratory-data-analysis-eda)
+- [Module 05. Data Preparation](#module-05-data-preparation)
 
 ---
 
@@ -67,6 +68,7 @@ Note: the test dataset applied on version 02 was generated on the customers' pre
 ### 3. Solution approach: The CRISP-DS Cycle
 To design, model and deploy the solution will be applied the CRISP-DS (Cross-Industry Standard Process - Data Science, a.k.a. CRISP-DM) project management method.
 The CRISP is a cyclic, iterative development method that covers all the steps needed to solve a data science problem. The image below shows the CRISP cycle:
+
 ![](img/CRISP.jpg)
 
 [back to top](#table-of-contents)
@@ -349,6 +351,83 @@ For the categorical variables it is applied the Cramer-V correlation method. A s
 The heatmap below shows the categorical variables correlation according the Cramer-V method.
 
 ![](img/module04/3_2_cat_variables.PNG)
+
+[back to top](#table-of-contents)
+
+---
+
+## Module 05. Data Preparation
+
+Most of the Data Science problems, and this one is also included, have many different sorts of values in the dataset, which represents different range of values. For example, the variable month have a range from 1 to 12, while the competition distance variable has values up to 200000. That can difficult the machine learning training. Furthermore, the categorical variables are in most of the cases with text information, which the machine learning algorithm cannot interpret. To solve this is issue, the data must be prepared (a.k.a. preprocessed) so that the machine learning model can properly train and deliver high performance results.
+
+There are mainly three types of data preparation:
+- **Normalization:** Rescale the center (mean) to zero with standard deviation of 1, usually applied for variables with a normal, Gaussian distribution;
+- **Rescaling:** Rescale the numerical variable to a range between 0 and 1, normally applied for variables without a Gaussian distribution;
+- **Transformation:**
+    - Conversion of categorical variables to numerical (Encoding);
+    - Nature transformation for variables with cyclic nature (for example months of the year);
+    - Logarithm transformation.
+
+### 5.1. Rescaling
+All numerical variables without a cyclic attribute will be rescaled. As verified on the exploratory data analysis, none of them have a Normal (Gaussian) distribution. Therefore, the normalization will not be applied.
+
+Two rescaling techniques will be applied: the Min-Max Scaler and the Robust Scaler.
+
+The Min-Max Scaler is applied in non-Gaussian distributions. However, it is susceptible to outliers, that is, if the feature has a high outlier influence, than the Min-Max Scaler will tend to result in distorted numbers due to the outliers. That happens because it uses the maximal and minimal values (range) to rescale the numbers.
+
+The Robust Scaler is also applied to non-Gaussian distributions, and performs better for variables with outliers, because it scales the data with the range of the first quartile (25th quantile) and the third quartile (75th quantile) of the IQR (Interquartile Range).
+
+Hence, to decide which scaler to apply it is necessary to check the outliers influence in each numerical variable. To do so, it was verified the box plot and the stats summary of the variables.
+
+One important note to add is that the box plot shows clearly the outliers of a variable. The “maximum” and “minimum” values shown in the box plot are actually calculated as shown below:
+
+![](img/module05/ 5_1_boxplot.PNG)
+
+Therefore, every observation that is below or above the minimum and maximum of the boxplot are considered outliers. If the variable has lots of points in this area, that means it has a high outliers influence, than the Robust Scaler must be applied. On the other hand, if the variable have few points in this area, means that it has a low outliers influence, hence the Min Max Scaler can be applied.
+
+Below are the box plots and stats summary of the numerical variables of this project.
+
+![](img/module05/ 5_1_boxplot_competitiondistance.PNG)
+
+![](img/module05/ 5_1_boxplot_competitiontimemonth.PNG)
+
+![](img/module05/ 5_1_boxplot_promotimeweek.PNG)
+
+![](img/module05/ 5_1_table_describe_1.PNG)
+
+![](img/module05/ 5_1_boxplot_customers.PNG)
+
+![](img/module05/ 5_1_table_describe_2.PNG)
+
+![](img/module05/ 5_1_boxplot_competitionopensinceyear.PNG)
+
+After the analysis, the scalers were applied as follows:
+- **Robust Scaler (high outliers influence):** competition_distance, competition_time_month, competition_open_since_year and customers
+- **Min-Max Scaler (low outliers influence):** competition_time_month, promo_time_week, year, promo2_since_year
+
+### 5.2. Transformation
+
+#### 5.2.1. Encoding
+Encoding transformation is applied for categorical variables that contain label values rather than numeric values. There are several encoding techniques, and it is not the scope of this project to describe each one of them. The encoding techniques applied in this project are:
+- One-Hot Encoding;
+- Label Encoding;
+- Ordinal Encoding.
+
+The One-Hot Encoding assigns for each label of the categorical variable a binary value, also known as “dummy variable”.  This encoding is very simple and easy to apply, however it increases the number of columns in the dataset, which means a higher dimensionality and therefore can negatively affect the machine learning model training. This encoding fits good for variables that has a “state” condition, for example for holidays: ordinary days have a state, while a holiday has another state. Hence, the one-hot encoding was applied for the state holiday variable.
+
+The Label Encoding assigns a number for each label of the categorical variable. It has a positive usage for variables with name, for example. Therefore, it was applied for the variable store type.
+
+The Ordinal Encoding, as the label encoding, also assigns a number for each label. The difference, however, is that it follows the order of magnitude of each label. For example: temperature labels like hot, cold and very hot would have the following sequence and values: very hot 3 > hot 2 > cold 1. Hence, the ordinal encoding was applied for the assortment variable.
+
+#### 5.2.2. Nature Transformation
+Nature transformation is applied for features cyclical in nature. These are features mainly related to time: months, days, weekdays, hours, etc. The machine learning algorithm must somehow know that such features have this characteristic, therefore such transformation is needed. The cyclical encoding method applied in this project was the data transformation into two dimensions using a sine and cosine transformation. It was applied for the cyclic variables: day_of_week, day, month, week_of_year, competition_open_since_month and  promo2_since_week.
+
+#### 5.2.3. Logarithm Transformation
+The logarithm transformation (or log transformation) is applied for variables with an exponential distribution, so that after the transformation it has a Gaussian distribution. The advantages are: faster computation, lower order of magnitude, clearer relationships and homogeneous variance. In addition, the machine learning algorithm predicts better with the dependent variable (target) on a (or approximately) normal distribution.
+
+The log transformation was applied in the response variable (sales), as it has an exponential distribution. The images below show the sales distribution before and after the log transformation.
+
+![](img/module05/ 5_2_3_logtransformation.PNG)
 
 [back to top](#table-of-contents)
 
