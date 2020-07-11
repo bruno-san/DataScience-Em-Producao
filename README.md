@@ -12,6 +12,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 04. Exploratory Data Analysis (EDA)](#module-04-exploratory-data-analysis-eda)
 - [Module 05. Data Preparation](#module-05-data-preparation)
 - [Module 06. Feature Selection](#module-06-feature-selection)
+- [Module 07. Machine Learning Modelling](#module-07-machine-learning-modelling)
 
 ---
 
@@ -482,6 +483,59 @@ Note: columns date and sales were removed before Boruta application, as they wil
 Features day_sin, month_sin and week_of_year_sin were not chosen by Boruta, nevertheless their complement day_cos, month_cos and week_of_year_cos were chosen. Therefore, they were added in the final features list, so that these features have complete representation with both complementary sin and cos dimensions. Finally, the final features list was set as shown below.
 
 ![](img/6_3_boruta_finalfeatures.PNG)
+
+[back to top](#table-of-contents)
+
+---
+
+## Module 07. Machine Learning Modelling
+The machine learning model is an algorithm that builds a mathematical (or statistical) model based on the training data in order to predict an output. It “learns” the behavior of the target (response variable) based on the available variables and then generalizes it to the future (prediction), all of that without being explicitly programmed to do so.
+
+Learning can be supervised, semi-supervised, unsupervised and reinforcement.
+
+In this project was applied a supervised learning model, as it has a response variable (desired output). Also, as the problem to be solved involves time and sales prediction (numerical value), then it is a time-series regression problem.
+
+There are several machine learning models that can be applied in order to solve such problem. The best way to know which of them best predicts the output. One can apply all of them and then calculate the error. Hence, it can be defined the model with the lowest error and use it to predict the final output.
+
+In this problem, the following models were applied in order to evaluate and check the one with the lowest error.
+- **Mean model** – it serves as the baseline for performance comparison;
+- **Linear Regression** – applied first according to the “Occam’s Razor” principle to use the simplest model. If it performs well, than the linear regression can be kept as the final model. On the other hand, if the model performs poorly, than it means that the dataset and the phenomenon to be modelled are too complex for a linear model, so that a non-linear one must be applied;
+- **Linear Regression Regularized (Lasso-Reed)** – usually delivers a better performance than the standard linear regression;
+- **Random Forest Regressor** – A type of ensemble learning algorithm based on decision trees adapted for regression;
+- **XGBoost Regressor** – Another type of ensemble learning based on gradient boosted trees.
+
+### 7.1. Models’ Single Performance
+After running the above-mentioned models, the respective predictions were computed. To measure the models’ performance, the following errors were calculated so that it is possible to compare them. The model performs best as the error is the lowest one.
+- **MAE** – Mean Absolute Error;
+- **MAPE** – Mean Absolute Percentage Error;
+- **RMSE** – Root Mean Square Error.
+
+More details about the errors are explained in module 09.
+
+The errors calculated for each model is shown below:
+
+![](img/7_1_error_singleperformance.PNG)
+
+The Random Forest and the XGBoost models have the lowest error values. The linear regression and the linear regression Lasso have a higher error value, which means that the problem is too complex for a linear model.
+
+### 7.2. Models’ Real Performance – Cross-Validation
+The errors calculated in the previous step do not represent the real models’ performance. That is because the chosen period of the test dataset considers the last 6 weeks of the original dataset, however in this period may have special occurrences such as the best sales week (or the worst).
+
+In order to consider all phenomenon (dataset) variability, it is necessary to measure the performance of the model on several time periods from the complete dataset.
+
+The technique to split the dataset in several parts in order to measure the model’s performance in each one of them is called the Cross-Validation technique.
+
+Furthermore, the chronological order must be respected, and the validation period is always the same. In this case, 6 weeks.
+
+The model’s real performance must be reported considering the standard deviation variation, so that it is clearly informed the error’s range.
+
+The cross-validation was applied for all models, with exception of the median one. Below are the calculated errors with their respective standard deviation variation.
+
+![](img/7_1_error_realperformance.PNG)
+
+The model with the lowest error is the Random Forest Regressor.
+
+The XGBoost can be improved changing its parameters as described in the next step (module 08).
 
 [back to top](#table-of-contents)
 
