@@ -381,25 +381,25 @@ Hence, to decide which scaler to apply it is necessary to check the outliers inf
 
 One important note to add is that the box plot shows clearly the outliers of a variable. The “maximum” and “minimum” values shown in the box plot are actually calculated as shown below:
 
-![](img/module05/ 5_1_boxplot.PNG)
+![](img/module05/5_1_boxplot.PNG)
 
 Therefore, every observation that is below or above the minimum and maximum of the boxplot are considered outliers. If the variable has lots of points in this area, that means it has a high outliers influence, than the Robust Scaler must be applied. On the other hand, if the variable have few points in this area, means that it has a low outliers influence, hence the Min Max Scaler can be applied.
 
 Below are the box plots and stats summary of the numerical variables of this project.
 
-![](img/module05/ 5_1_boxplot_competitiondistance.PNG)
+![](img/module05/5_1_boxplot_competitiondistance.PNG)
 
-![](img/module05/ 5_1_boxplot_competitiontimemonth.PNG)
+![](img/module05/5_1_boxplot_competitiontimemonth.PNG)
 
-![](img/module05/ 5_1_boxplot_promotimeweek.PNG)
+![](img/module05/5_1_boxplot_promotimeweek.PNG)
 
-![](img/module05/ 5_1_table_describe_1.PNG)
+![](img/module05/5_1_table_describe_1.PNG)
 
-![](img/module05/ 5_1_boxplot_customers.PNG)
+![](img/module05/5_1_boxplot_customers.PNG)
 
-![](img/module05/ 5_1_table_describe_2.PNG)
+![](img/module05/5_1_table_describe_2.PNG)
 
-![](img/module05/ 5_1_boxplot_competitionopensinceyear.PNG)
+![](img/module05/5_1_boxplot_competitionopensinceyear.PNG)
 
 After the analysis, the scalers were applied as follows:
 - **Robust Scaler (high outliers influence):** competition_distance, competition_time_month, competition_open_since_year and customers
@@ -427,7 +427,7 @@ The logarithm transformation (or log transformation) is applied for variables wi
 
 The log transformation was applied in the response variable (sales), as it has an exponential distribution. The images below show the sales distribution before and after the log transformation.
 
-![](img/module05/ 5_2_3_logtransformation.PNG)
+![](img/module05/5_2_3_logtransformation.PNG)
 
 [back to top](#table-of-contents)
 
