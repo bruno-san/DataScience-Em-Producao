@@ -540,3 +540,29 @@ The XGBoost can be improved changing its parameters as described in the next ste
 [back to top](#table-of-contents)
 
 ---
+
+## Module 08. Hyperparameter Fine Tuning
+The machine learning algorithms have a set of hyperparameters that can be selected in order to improve the model’s performance. The hyperparameters aren’t optimized by the learning algorithm, so the best combination must be set in order to optimize the model.
+
+There are three main fine tuning strategies:
+1. Random Search;
+2. Grid Search;
+3. Bayesian Search.
+
+### 8.1. Random Search
+The random search set the hyperparameters values randomly, based on a random set of values for each hyperparameter. It is widely used because is fast, easy to implement and therefore has a low cost. The cons are: the same set of values can be applied more than once and the best combination of values may not be found.
+
+### 8.2. Grid Search
+The grid search set all the possible hyperparameters combinations so that it selects the set of values that maximizes the model’s performance (the best combination possible). The con is that it takes a considerable time to be concluded, therefore an expansive solution.
+
+### 8.3. Bayesian Search
+The Bayesian search set the hyperparameters values based on the Bayesian theory: it selects the next parameters based on past evaluation results.
+
+### 8.4. Final XGBoost Model
+The hyperparameter tuning technique applied in this project was the random search. The final model generated the following error values:
+
+![](img/8_4_error_finetuning.PNG)
+
+[back to top](#table-of-contents)
+
+---
