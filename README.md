@@ -538,6 +538,19 @@ The model with the lowest error is the Random Forest Regressor.
 
 The XGBoost can be improved changing its parameters as described in the next step (module 08).
 
+### 7.3. Models’ Performance Comparison – with and without Customers Feature
+One important point to highlight is the models’ performance with and without the customers feature in the training dataset.
+
+In the version 01 of the model, the feature customers was not applied, once it was not available in the test dataset – it is not known how many customers will visit the stores in the next 6 weeks.
+
+In the version 02, as previously mentioned, the number of customers was applied based on the specific customers prediction project, which predicted the number of customers for the next 6 weeks. As a result, a new test dataset was generated with the predicted customers, hence in version 02 the learning algorithm trained with this feature.
+
+In the table below is the models’ performance comparison, with (version 02) and without (version 01) customers.
+
+![](img/7_3_error_comparison.PNG)
+
+All the regression models presented an error improvement. That’s because both sales and customers have a strong, linear correlation, as previously shown in the exploratory data analysis. The Random Forest Regressor improved the MAPE by 58% and the XGBoost improved the error (MAPE) by 57%.
+
 [back to top](#table-of-contents)
 
 ---
@@ -563,6 +576,13 @@ The Bayesian search set the hyperparameters values based on the Bayesian theory:
 The hyperparameter tuning technique applied in this project was the random search. The final model generated the following error values:
 
 ![](img/8_4_error_finetuning.PNG)
+
+### 8.5. XGBoost Final Model Performance – Cross-Validation
+In order to check the XGBoost tuned real performance, the cross-validation was executed. This is important not only to verify the real error numbers, but also to check if the model is overfitted, as it has low error values: the mean absolute percentage error is lower than 5%. If the model is overfitted, first in the cross-validation it would be recognized and second, even though the cross-validation was not executed, the model would make errors in the prediction when applied to the test dataset, which were not seen by the learning algorithm during training. Hence, the cross-validation is a fundamental step in order to check the model with the hyperparameters tuned.
+
+Below are the errors values after the cross-validation execution. The values remain lower than before the hyperparameter fine tuning, and the MAPE has 0.05, which means only 5% of error. Hence, the XGBoost tuned is not overfitted and can be applied to generate the desired predictions.
+
+![](img/8_5_error_crossvalidation.PNG)
 
 [back to top](#table-of-contents)
 
