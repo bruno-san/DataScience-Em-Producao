@@ -14,6 +14,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 06. Feature Selection](#module-06-feature-selection)
 - [Module 07. Machine Learning Modelling](#module-07-machine-learning-modelling)
 - [Module 08. Hyperparameter Fine Tuning](#module-08-hyperparameter-fine-tuning)
+- [Module 09. Error Translation and Interpretation](#module-09-error-translation-and-interpretation)
 
 ---
 
@@ -583,6 +584,140 @@ In order to check the XGBoost tuned real performance, the cross-validation was e
 Below are the errors values after the cross-validation execution. The values remain lower than before the hyperparameter fine tuning, and the MAPE has 0.05, which means only 5% of error. Hence, the XGBoost tuned is not overfitted and can be applied to generate the desired predictions.
 
 ![](img/8_5_error_crossvalidation.PNG)
+
+[back to top](#table-of-contents)
+
+---
+
+## Module 09. Error Translation and Interpretation
+The goal of this step is to understand each error measurement, as well as to translate it into the business “language”, so that it is possible to properly present the project results to the business stakeholders.
+
+At this point in the real, business world, it would have been 2 to 3 months of project work and development. The Data Scientist could already present it to the respective project stakeholders how they will apply it and which gain the model delivers, in order to align expectation and present the project results reached so far, as well as to inform the next CRISP steps to finally conclude the project first cycle.
+
+In other words: the aim is to understand the model’s performance and tell the stakeholders how much money the project will deliver to the company.
+
+There are two main approaches for the model’s performance:
+**1. Regression Model’s Performance**
+    a. MAE (Mean Absolute Error);
+    b. MAPE (Mean Absolute Percentage Error);
+    c. RMSE (Root Mean Square Error);
+    d. MPE (Mean Percentage Error).
+
+**2. Business Model’s Performance**
+    a. Comparison with the status quo;
+    b. General business improvements: revenue, number of customers, NPS, efficiency, cost reductions, etc.
+
+### 9.1. MAE – Mean Absolute Error
+The mean absolute error calculates the absolute difference between each target value (y) and predicted value (yhat), then sums all of them and divide by the number of observations (n). Below is the MAE formula:
+
+![](img/module09/9_1_mae_formula.PNG)
+
+The MAE key points are:
+- Assigns an equal weight for all errors;
+- Robust in the presence of outliers;
+- Easy understanding for the business team.
+
+### 9.2. MAPE – Mean Absolute Percentage Error
+The mean absolute percentage error is basically the percentage of the MAE. It calculates the absolute error of each target value and then divides by the target (y) itself. Below is the formula:
+
+![](img/module09/9_2_mape_formula.PNG)
+
+The MAPE key points are:
+- It shows how far the prediction is from the real value, by mean and percentage;
+- It is widely used for results disclosure;
+- It cannot be applied if the target has value equals to zero.
+
+### 9.3. RMSE – Root Mean Square Error
+The root mean square error calculates the square of the difference between the target (y) and the prediction (yhat), divides by the number of observations (N) and then applies the square root. Below is the formula:
+
+![](img/module09/9_3_rmse_formula.PNG)
+
+The RMSE key points are:
+- Assigns more weight for bigger errors;
+- Susceptible in the presence of outliers;
+- Ideal to measure machine learning model’s performance.
+
+The RMSE is applied to calculate the machine learning model’s performance, so that improvements can be implemented in order to reduce the error. The RMSE is reported for problems that require a rigorous analysis. The MAE and MAPE, for example, are reported for problems that do not require such rigor.
+
+### 9.4. MPE – Mean Percentage Error
+The goal of the MPE is to show if the model is overestimating (MPE < 0) or underestimating (MPE > 0) the predictions. The MPE formula is shown below:
+
+![](img/module09/9_4_mpe_formula.PNG)
+
+The MPE key points are:
+- It cannot be applied to measure the model’s performance;
+- It shows if the model is overestimated or underestimated;
+- It cannot be applied if the target has value equals to zero.
+
+### 9.5. Error Metrics Summary
+The error metrics can be reported as follows:
+**1. Regression Model’s Performance: RMSE and MPE** – Metrics to improve the model’s performance;
+**2. Business Model’s Performance: MAE, MAPE and MPE** – Report Metrics for the business team.
+
+### 9.6. Business Model’s Performance
+As previously mentioned, the model’s results must be at some point of time presented to the business team and the project stakeholders.
+
+The machine learning model can be compared to the current prediction model available in the company (if available). Normally, this model is linear and the sales prediction, for example, are made based on the sales of the last month and based on the sales of the same month in the previous year. The comparison between both the current and the new prediction model can be done through comparing the errors: if the error value in the new model is reduced compared to the current one, than it can be said that it has improved by error reduction percentage. In this moment, it is also important to keep the professional, helpful and contribution behavior.
+
+### 9.7. Project’s Model Performance
+Below are the graphics and results of the model selected and trained for this project. The results contain the predicted values made by the XGBoost tuned algorithm.
+
+#### 9.7.1. Business Performance
+Below is the list of the 5 stores that have the worst MAPE values. The table also shows the sales values considering the predicted worst and best scenarios, as well as the actual sales values and the sales predictions.
+
+![](img/module09/9_7_1_predictions_worst_mape.PNG)
+
+The scatter plot below shows the MAPE distribution per store. The highlight is that most of the stores have a MAPE under 6%. The points highlighted in red shows the challenging stores with a MAPE higher than 14%.
+
+![](img/module09/9_7_1_mape_scatterplot.PNG)
+
+#### 9.7.2. Overall Performance
+The table below shows the overall business performance:  the total amount of sales, predicted sales, worst and best predicted scenarios.
+
+![](img/module09/9_7_2_overall_performance.PNG)
+
+The sum of the predicted sales is slightly lower than the actual sales from the test dataset, which means that if a decision to renovate the stores is made based on the predictions, it will at least be lower than the actual sales, hence the probability to spend more money on the renovation than the incoming money from sales is low.
+
+#### 9.7.3. Machine Learning Performance
+Below are the graphics and comments related to the machine learning performance.
+
+**- Sales x Predictions**
+
+![](img/module09/9_7_3_sales_prediction.PNG)
+
+The graphic shows that the sales and predictions have very close line, which means the prediction have the same shape of the sales line. The shadow areas represent several predictions (variance), value that may vary from store to store. A big shadow means a higher error. The graphic time period refers to 6 weeks, exactly the amount of time that the project must predict the sales.
+
+**- Error Rate**
+
+![](img/module09/9_7_3_error_rate.PNG)
+
+The error rate graphic shows the error rate of the predictions at each time period. The dashed lined is placed on value 1, which means no error. The values above this line, that is, above one, represent an overestimated prediction. On the other hand, the values below the line, that is, below one, represent an underestimated prediction.
+
+**- Error Distribution**
+
+![](img/module09/9_7_3_error_distribution.PNG)
+
+The Error distribution graphic shows that the error has a normal distribution. The concentration of most error values are between -2500 and 2500, while the tail values shows the minimum and maximum error value (range). The error is the difference between the observed sales and the predicted sales.
+
+**- Predictions x Error**
+
+![](img/module09/9_7_3_prediction_error_scatter.PNG)
+
+The scatter plot shows the prediction values by each error value. The ideal shape of a good prediction is the point’s distribution inside a “tube”, which means that error variance along the prediction range, is continuous.
+
+**- Lowest MAPE – Store 869**
+
+![](img/module09/9_7_3_lowest_mape.PNG)
+
+Store 869 has the lowest MAPE (0.025144), that is, the model had the best performance predicting this store’s sales.
+
+**- Highest MAPE – Store 909**
+
+![](img/module09/9_7_3_highest_mape.PNG)
+
+Store 909 has the highest MAPE (0.164578), that is, the model had the worst performance predicting this store’s sales.
+
+Now the model is ready to be implemented in production and therefore be applied and used by the business team. The next module shows the model's deployment to production.
 
 [back to top](#table-of-contents)
 
