@@ -597,13 +597,13 @@ At this point in the real, business world, it would have been 2 to 3 months of p
 In other words: the aim is to understand the model’s performance and tell the stakeholders how much money the project will deliver to the company.
 
 There are two main approaches for the model’s performance:
-**1. Regression Model’s Performance**
+ **1. Regression Model’s Performance**
     a. MAE (Mean Absolute Error);
     b. MAPE (Mean Absolute Percentage Error);
     c. RMSE (Root Mean Square Error);
     d. MPE (Mean Percentage Error).
 
-**2. Business Model’s Performance**
+ **2. Business Model’s Performance**
     a. Comparison with the status quo;
     b. General business improvements: revenue, number of customers, NPS, efficiency, cost reductions, etc.
 
@@ -651,8 +651,8 @@ The MPE key points are:
 
 ### 9.5. Error Metrics Summary
 The error metrics can be reported as follows:
-**1. Regression Model’s Performance: RMSE and MPE** – Metrics to improve the model’s performance;
-**2. Business Model’s Performance: MAE, MAPE and MPE** – Report Metrics for the business team.
+    **1. Regression Model’s Performance: RMSE and MPE** – Metrics to improve the model’s performance;
+    **2. Business Model’s Performance: MAE, MAPE and MPE** – Report Metrics for the business team.
 
 ### 9.6. Business Model’s Performance
 As previously mentioned, the model’s results must be at some point of time presented to the business team and the project stakeholders.
