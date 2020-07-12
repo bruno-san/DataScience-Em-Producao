@@ -598,14 +598,14 @@ In other words: the aim is to understand the model’s performance and tell the 
 
 There are two main approaches for the model’s performance:
 1. **Regression Model’s Performance**
-a. MAE (Mean Absolute Error);
-b. MAPE (Mean Absolute Percentage Error);
-c. RMSE (Root Mean Square Error);
-d. MPE (Mean Percentage Error).
+    - MAE (Mean Absolute Error);
+    - MAPE (Mean Absolute Percentage Error);
+    - RMSE (Root Mean Square Error);
+    - MPE (Mean Percentage Error).
 
 2. **Business Model’s Performance**
-a. Comparison with the status quo;
-b. General business improvements: revenue, number of customers, NPS, efficiency, cost reductions, etc.
+    - Comparison with the status quo;
+    - General business improvements: revenue, number of customers, NPS, efficiency, cost reductions, etc.
 
 ### 9.1. MAE – Mean Absolute Error
 The mean absolute error calculates the absolute difference between each target value (y) and predicted value (yhat), then sums all of them and divide by the number of observations (n). Below is the MAE formula:
