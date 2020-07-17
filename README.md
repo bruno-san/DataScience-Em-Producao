@@ -15,7 +15,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 07. Machine Learning Modelling](#module-07-machine-learning-modelling)
 - [Module 08. Hyperparameter Fine Tuning](#module-08-hyperparameter-fine-tuning)
 - [Module 09. Error Translation and Interpretation](#module-09-error-translation-and-interpretation)
-- [Module 10. Deploy Model to Production](#deploy-model-to-production)
+- [Module 10. Deploy Model to Production](#module-10-deploy-model-to-production)
 
 ---
 
@@ -769,7 +769,7 @@ The Webapp folder contains all the model files that were developed in the Rossma
 
 The files handler_v02.py and rossmann_v02.py were modified in this folder in order to update the relative paths inside both codes that refer to the model file and to the parameters files respectively. Furthermore, the handler.py code was also updated with the port 5000 specification.
 
-The folder was uploaded in the Heroku (), which is a free, online cloud server. Therefore, the production architecture can be represented as shown below:
+The folder was uploaded in the Heroku, which is a free, online cloud server. Therefore, the production architecture can be represented as shown below:
 
 ![](img/module10/10_heroku.PNG)
 
@@ -783,7 +783,6 @@ For this project, the test was performed with both Jupyter Notebook and Postman.
 - Jupyter Notebook
 
 ![](img/module10/jupyter_01.PNG)
-
 ![](img/module10/jupyter_02.PNG)
 
 - Postman
