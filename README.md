@@ -15,6 +15,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 07. Machine Learning Modelling](#module-07-machine-learning-modelling)
 - [Module 08. Hyperparameter Fine Tuning](#module-08-hyperparameter-fine-tuning)
 - [Module 09. Error Translation and Interpretation](#module-09-error-translation-and-interpretation)
+- [Module 10. Deploy Model to Production](#deploy-model-to-production)
 
 ---
 
@@ -718,6 +719,78 @@ Store 869 has the lowest MAPE (0.025144), that is, the model had the best perfor
 Store 909 has the highest MAPE (0.164578), that is, the model had the worst performance predicting this store’s sales.
 
 Now the model is ready to be implemented in production and therefore be applied and used by the business team. The next module shows the model's deployment to production.
+
+[back to top](#table-of-contents)
+
+---
+
+## Module 10. Deploy Model to Production
+The goal of the model deployment is to make the model’s prediction available for any user. User can be: a person, smartphone, app, website, google sheets, excel, or any software connected in the internet which can execute an API request. The Production Architecture is shown below:
+
+![](img/module10/10_production_architecture.PNG)
+
+The prediction request can be made by any of the above-mentioned users. The interface between the user and the model is made through the Handler API. API stands for Application Programming Interface and is basically a computing interface which allows the communication and interaction between different software applications. Later both Handler API and the model will be uploaded in a cloud server (heroku) so that they can work with requests sent through the internet.
+
+The following steps will be performed in order to deploy the model in production:
+1. Create a Class with data cleansing, transformations and encoding (Rossmann_v02.py);
+2. Create an API (Handler_v02.py);
+3. Write a script to test the Handler API;
+4. Upload API (Handler_v02.py) and the model (with corresponding files) to the cloud server (keroku);
+5. Test the model uploaded on the cloud server.
+
+Note: some files were renamed with v02 in the second CRISP cycle, in order to distinguish them from the files created in the previous cycle.
+
+### 10.1. The Class Rossmann_v02.py – Data Cleansing, Transformation, Encoding
+The first step refers to the creation of a class with the data cleansing, transformation and encoding developed in the Rossmann project. The goal is to prepare the input dataset the same way the training dataset was prepared to train the model, so that the model can properly predict the desired values. Otherwise, the model would not “understand” the data and could not perform the prediction.
+
+### 10.2. Handler_v02.py – API for Interface between User and Model
+The Handler_v02.py file is the API to allow the interface between the user and the model. The handler will enable a port on the local host, so that the request can be sent there. Once the handler receives a request, it executes the Rossmann_v02.py class and also the model itself, then returns the original data with the predictions made by the model. All of this is possible with Flask library, which is a set of functions that handles requests and web environment.
+
+### 10.3. API Test
+The next step is to test the API. The goal is to check if the communication with the handler is working (send / receive data), as well as if the model is working properly.
+For that, a specific script was written in the Jupyter Notebook, so that the input dataset could be loaded, transformed to JSON and then sent to the endpoint (local host, port 5000). Then, the response received from the handler was converted back to a pandas dataframe and finally checked if the received values were as expected.
+
+### 10.4. Upload API and Model to the Cloud Server (Heroku)
+In the fourth step, the API and Model files are uploaded in a cloud server. In this case, the Heroku server was used. However, before the upload, both files and folders must be prepared so that the model can run in the server properly.
+
+A specific folder called “webapp” was created to contain the needed files and folders for the cloud server. The folder structure is shown below:
+- **Webapp (Folder)**
+- Procfile (File) – command to initialize the handler.py
+- Requirements.txt – venv requirements
+- Handler_v02.py – API
+- Rossmann (Folder) – Class Rossmann
+    - Rossmann_v02.py
+- Parameter (Folder) – Scaler and encoding for Rossmann Class
+    - Scaler and encoding files
+- Model (Folder) – XGBoost Model
+    - model_xgb_rossmann_v02.pkl
+
+The Webapp folder contains all the model files that were developed in the Rossmann project and can now be applied in the web server to execute the sales predictions.
+
+The files handler_v02.py and rossmann_v02.py were modified in this folder in order to update the relative paths inside both codes that refer to the model file and to the parameters files respectively. Furthermore, the handler.py code was also updated with the port 5000 specification.
+
+The folder was uploaded in the Heroku (), which is a free, online cloud server. Therefore, the production architecture can be represented as shown below:
+
+![](img/module10/10_heroku.PNG)
+
+### 10.5. Test the Model on the Cloud Server
+The last step is to test the model uploaded in the cloud server. The goal is to check if the send  / receive communication is working correctly, as well as to check if the model is running properly.
+
+The test can be performed through a request that must be sent in the endpoint created by the Heroku. The endpoint is the address that the model is running in the cloud server. The request can be executed in several ways: with Jupyter Notebook, software Postman, Telegram, or any device connected in the internet that can perform an API request.
+
+For this project, the test was performed with both Jupyter Notebook and Postman. The communication with the cloud server and the model worked properly, hence a successful test, as shown in the images below.
+
+- Jupyter Notebook
+
+![](img/module10/jupyter_01.PNG)
+
+![](img/module10/jupyter_02.PNG)
+
+- Postman
+
+![](img/module10/postman.PNG)
+
+The model is finally deployed in a web cloud server and running as expected. Hence, the last step of the project can be developed and implemented, as described in the next module.
 
 [back to top](#table-of-contents)
 
