@@ -855,9 +855,9 @@ After the adjustments the folder can be uploaded in a new, specific heroku repos
 
 The last step is to set the telegram webhook, so that it can be linked to the Rossmann Bot API uploaded in the Heroku. In the end of the folder upload in the Heroku it is automatically generated the endpoint. This endpoint will be the address for the Telegram Bot webhook, so that it can communicate with the Rossmann API.
 
-The image below shows the Rossmann Bot on Telegram working after the new webhook was set. It is correctly running: the user send a message with the store number and the Bot replies with the sales value for the next 6 weeks. If the store is not available, then the Bot replies with “Store Not Available”. If a text or another character different from number is sent, then the Bot replies “Invalid Store ID”.
+The gif animation and the image below shows the Rossmann Bot on Telegram working after the new webhook was set. It is correctly running: the user send a message with the store number and the Bot replies with the sales value for the next 6 weeks. If the store is not available, then the Bot replies with “Store Not Available”. If a text or another character different from number is sent, then the Bot replies “Invalid Store ID”.
 
-![](img/module11/telegram-running.PNG)
+![](img/module11/telegramBot.gif)
 ![](img/module11/telegram-running_02.PNG)
 
 [back to top](#table-of-contents)
