@@ -17,6 +17,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 09. Error Translation and Interpretation](#module-09-error-translation-and-interpretation)
 - [Module 10. Deploy Model to Production](#module-10-deploy-model-to-production)
 - [Module 11. The Rossmann Telegram Bot](#module-11-the-rossmann-telegram-bot)
+- [Conclusion](#conclusion)
 
 ---
 
@@ -858,6 +859,27 @@ The image below shows the Rossmann Bot on Telegram working after the new webhook
 
 ![](img/module11/telegram-running.PNG)
 ![](img/module11/telegram-running_02.PNG)
+
+[back to top](#table-of-contents)
+
+---
+
+## Conclusion
+After 11 modules, the project is concluded and implemented. As expected, the sales forecast for the next 6 weeks is done and available at hand via smartphone.
+
+The project was developed based on the initial business request and also based on the underlying necessity of the business team regarding the sales forecast. The CRISP-DM project management methodology was applied and every step of it was carefully studied and developed, from the basic, raw data analysis, then the feature engineering, EDA, Data Preparation, Feature Selction, train the machine learning model until, measure the error and interpret it until finally the deployment. In the final step, a Telegram Bot was implemented in order to make the information easily and quickly available in any smartphone with Telegram app and anywhere with an internet connection.
+
+Furthermore, a specific customer’s forecast project was developed in order to apply its prediction in the second CRISP cycle of the Rossmann project. It not only improved the original prediction result and errors, but also brought new business insights, which can help and enhance the business team understanding of the problem and also the decision making procedure.
+
+The challenges of the project were: the errors during the code development, the deployment in the cloud and the implementation of the customers project outcome in the second version of the Rossmann project.
+
+The errors found during the code development were several, from wrong syntax writing to library and python version compatibility. Fortunately, all of them were solved after a lot of solution search and experimentation, and the good thing is that the errors force you to find a solution and, consequently, you learn more about the topic as before the failure. So, in the end this is a good lesson learned.
+
+Another challenging situation was the deployment of the model. Several errors were found, but mainly the communication, even in the test phases on the local host, presented lots of errors. Again, such situation forces you to search, ask and find a solution, which after all and after the solution implementation you have more knowledge about the subject and hence can perform better in a new project. This was very clear, as in the second Rossmann project version the things were implemented much faster than the previous one.
+
+To implement the customers’ prediction in the second Rossmann project version was a real challenge for two main reasons: it demanded a new, specific project and it was a completely new situation that was not foreseen in the course itself, which required particularly tight attention to every analysis and details, in order to not commit any mistake and hence jeopardize the final result. Every step, as detailed described above, was made with total care of the data, code and underlying logic behind it, in order to really understand the problem and really implement a good, successful solution.
+
+The Rossmann Project lasted 2 months and a week to be developed and implemented, considering also the course lectures, additional reading and topics search, course notes, as well as the customers’ prediction project and the second CRISP cycle. The challenges faced throughout the development, as well as all the effort put on it such as the long hours coding, studying, searching and experimenting problems solutions, further reading, etc. brought relevant knowledge on the data science field, and also the lesson learned that the discipline, the resilience and the focus on such theme are crucial for a successful project development and implementation. 
 
 [back to top](#table-of-contents)
 
