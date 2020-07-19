@@ -756,7 +756,7 @@ For that, a specific script was written in the Jupyter Notebook, so that the inp
 In the fourth step, the API and Model files are uploaded in a cloud server. In this case, the [Heroku](https://www.heroku.com) server was used. However, before the upload, both files and folders must be prepared so that the model can run in the server properly.
 
 A specific folder called “webapp” was created to contain the needed files and folders for the cloud server. The folder structure is shown below:
-- **Webapp (Folder)**
+- **Webapp_v02 (Folder)**
 - Procfile (File) – command to initialize the handler.py
 - Requirements.txt – venv requirements
 - Handler_v02.py – API
