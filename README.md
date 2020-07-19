@@ -16,6 +16,7 @@ This Repository contains the scripts and files related to the course Data Scienc
 - [Module 08. Hyperparameter Fine Tuning](#module-08-hyperparameter-fine-tuning)
 - [Module 09. Error Translation and Interpretation](#module-09-error-translation-and-interpretation)
 - [Module 10. Deploy Model to Production](#module-10-deploy-model-to-production)
+- [Module 11. The Rossmann Telegram Bot](#module-11-the-rossmann-telegram-bot)
 
 ---
 
@@ -751,7 +752,7 @@ The next step is to test the API. The goal is to check if the communication with
 For that, a specific script was written in the Jupyter Notebook, so that the input dataset could be loaded, transformed to JSON and then sent to the endpoint (local host, port 5000). Then, the response received from the handler was converted back to a pandas dataframe and finally checked if the received values were as expected.
 
 ### 10.4. Upload API and Model to the Cloud Server (Heroku)
-In the fourth step, the API and Model files are uploaded in a cloud server. In this case, the Heroku server was used. However, before the upload, both files and folders must be prepared so that the model can run in the server properly.
+In the fourth step, the API and Model files are uploaded in a cloud server. In this case, the [Heroku](https://www.heroku.com) server was used. However, before the upload, both files and folders must be prepared so that the model can run in the server properly.
 
 A specific folder called “webapp” was created to contain the needed files and folders for the cloud server. The folder structure is shown below:
 - **Webapp (Folder)**
@@ -790,6 +791,73 @@ For this project, the test was performed with both Jupyter Notebook and Postman.
 ![](img/module10/postman.PNG)
 
 The model is finally deployed in a web cloud server and running as expected. Hence, the last step of the project can be developed and implemented, as described in the next module.
+
+[back to top](#table-of-contents)
+
+---
+
+## Module 11. The Rossmann Telegram Bot
+The aim of this module is to implement a Telegram Bot for the Rossmann project, so that the sales forecast of a store can be easily, quickly requested and automatically provided in a smartphone with the Telegram app. Therefore, the forecast can be accessed every time, anywhere with an internet connection. The input message to request the store sale forecast will be the store number.
+
+### 11.1. Telegram-Bot Architecture
+The image below shows the Telegram-Bot architecture. A new API (Rossmann API in the image) is needed to make the interface between the Telegram App and the handler API developed in the previous module. The new API will be stored in the cloud server Heroku in a folder (rossmann-telegram-api_v02) which will also contain the input dataset, the virtual environment requirements, as well as the Procfile, which starts the new API.
+
+![](img/module11/telegram-bot-architecture.PNG)
+
+The Rossmann API “listens” to port 5000 in order to receive a new message. As it comes with the store number, the API parses the message, loads the dataset, requests and receives the sales forecast from the handler API and then sends back the message to the Telegram Bot with the sales value.
+
+### 11.2. The Telegram-Bot
+The Telegram-Bot will be a contact in the Telegram App where the user can send a message with the store number and then receive automatically a reply with the sales forecast for the next 6 weeks. The Telegram-Bot work as a Chatbot, which is basically a software application that conducts an online chat conversation via text. The Telegram-Bot is created with a Telegram contact called “BotFather”. The Telegram API manual is available on this [website](https://core.telegram.org/bots/api).
+
+The Telegram-Bot created for the Rossmann project is called Rossmannbot02.
+
+### 11.3. The Rossmann API for the Telegram Bot
+The new Rossmann API (file rossmann-bot-v02.py) is responsible for the interface between the Telegram App and the Handler API. The Rossmann API will execute the following commands:
+- “listen” in the port 5000 (default Flask port) to check new Telegram-Bot messages;
+- Parse the received message;
+- Load the Dataset;
+- Call the Handler API in order to apply the model and hence predict the sales;
+- Sum the total amount of predicted sales according the store informed in the received message;
+- Send message back to the Telegram-Bot with the sales value for the next 6 weeks.
+
+The Rossmann API has also a default message if the store informed in the message is not available in the dataset.
+
+### 11.4. Testing the Rossmann API for the Telegram-Bot
+Before the Rossmann API deployment is necessary to test it locally, in order to check if the API and also the Telegram Bot are working properly.
+
+The test is done in the local host. To complete the connection between the local host and the internet (to allow the communication with Telegram) it was used a tool called Ngrok downloaded from the website Ngrok.com that enables the local host connection. The Ngrok generates a https address that connects to the local host on port 5000. The generated https address is then linked to the Telegram Bot with the Set Webhook command, that links the generated address to the Telegram Bot.
+
+The images below show the test result in both Telegram Bot and the Ngrok HTTP traffic over the tunnel. The message was sent and the Bot replied with the total sales amount for the next 6 weeks predicted by the model deployed at Heroku.
+
+- Telegram-Bot messages sent and received
+
+![](img/module11/telegram-test.PNG)
+
+- Ngrok HTTP traffic over the tunnel
+
+![](img/module11/ngrok_httptraffic.PNG)
+
+### 11.5. Deploy Rossmann API for the Telegram-Bot in Production
+For the Deployment, the Heroku cloud server will be used again. A specific folder is created to later be uploaded in the Heroku. The folder has the following structure:
+- Rossmann-telegram-api_v02 (Folder)
+- Procfile (File) – command to initialize the rossmann- bot-v02.py
+- Requirements.txt – venv requirements
+- rossmann- bot-v02.py – API
+- store.csv – input dataset
+- test_customers.csv – input dataset
+
+The rossmann-bot-v02.py comes from the testing step and needs the following adjustments to work correctly in Heroku:
+- Delete store.csv and test_customers.csv path (they are on root);
+- Declare the Flask’s standard port so that Heroku can recognize it.
+
+After the adjustments the folder can be uploaded in a new, specific heroku repository for this application.
+
+The last step is to set the telegram webhook, so that it can be linked to the Rossmann Bot API uploaded in the Heroku. In the end of the folder upload in the Heroku it is automatically generated the endpoint. This endpoint will be the address for the Telegram Bot webhook, so that it can communicate with the Rossmann API.
+
+The image below shows the Rossmann Bot on Telegram working after the new webhook was set. It is correctly running: the user send a message with the store number and the Bot replies with the sales value for the next 6 weeks. If the store is not available, then the Bot replies with “Store Not Available”. If a text or another character different from number is sent, then the Bot replies “Invalid Store ID”.
+
+![](img/module11/telegram-running.PNG)
+![](img/module11/telegram-running_02.PNG)
 
 [back to top](#table-of-contents)
 
