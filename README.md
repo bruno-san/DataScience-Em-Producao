@@ -802,7 +802,7 @@ The aim of this module is to implement a Telegram Bot for the Rossmann project, 
 ### 11.1. Telegram-Bot Architecture
 The image below shows the Telegram-Bot architecture. A new API (Rossmann API in the image) is needed to make the interface between the Telegram App and the handler API developed in the previous module. The new API will be stored in the cloud server Heroku in a folder (rossmann-telegram-api_v02) which will also contain the input dataset, the virtual environment requirements, as well as the Procfile, which starts the new API.
 
-![](img/module11/telegram-bot-architecture.PNG)
+![](img/module11/telegram-bot-architecture-v02.PNG)
 
 The Rossmann API “listens” to port 5000 in order to receive a new message. As it comes with the store number, the API parses the message, loads the dataset, requests and receives the sales forecast from the handler API and then sends back the message to the Telegram Bot with the sales value.
 
